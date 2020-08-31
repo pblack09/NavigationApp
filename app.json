@@ -20,6 +20,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "description": "",
+    "android": {
+      "package": "com.philipblack12.NavigationApp"
     }
   }
 }

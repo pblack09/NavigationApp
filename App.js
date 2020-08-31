@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, TextInput, Button, View, SafeAreaView, Image, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, View, SafeAreaView, Image, FlatList, TouchableOpacity, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
   // MAIN LOGIN SCREEN
 function Login({ navigation }) {
   return (
-    <View style={styles.main}>
+    <View style={styles.mainContainer}>
       <Text style={styles.title}>Login</Text>
       <TextInput style={styles.input} placeholder="Email" />
       <TextInput
@@ -25,6 +25,12 @@ function Login({ navigation }) {
         <Button
           title="Signup"
           onPress={() => alert("Signup successful!")} />
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={() => alert("Reset password link sent")}>
+          <Text>Forgot password</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -65,11 +71,11 @@ function List({navigation}) {
         style={styles.itemsList}
         data={DATA}
         renderItem={({ item }) => (
-        <View style={styles.buttons}>
+        <View style={{margin: 18}}>
           <Button
             color={'#3E207A'}
             title={item.title}
-              onPress={() => navigation.navigate( item.title )} />
+            onPress={() => navigation.navigate( item.title )} />
         </View>
         )}
         keyExtractor={item => item.id}
@@ -84,22 +90,22 @@ function List({navigation}) {
 
 
   //===========================================================//
-  // DETAILS OF ARTICLES (Still need to fill out for each item)
+  // DETAILS OF ARTICLES
 function item1({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <Image
       source={require('./assets/trumpet.png')}
       style={styles.itemPicture} />
       <Text style={styles.title}>Details:</Text>
       <Text style={styles.description}>This instrument originated as a bugle used mainly to communicate orders to troops on the battlefields.</Text>
-      <Button style={styles.buttons} title="Go back" onPress={() => navigation.goBack()} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
 function item2({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <Image
       source={require('./assets/horn.jpg')}
       style={styles.itemPicture} />
@@ -111,7 +117,7 @@ function item2({ navigation }) {
 }
 function item3({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <Image
       source={require('./assets/trombone.jpg')}
       style={styles.itemPicture} />
@@ -123,7 +129,7 @@ function item3({ navigation }) {
 }
 function item4({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <Image
       source={require('./assets/euphonium.jpg')}
       style={styles.itemPicture} />
@@ -135,7 +141,7 @@ function item4({ navigation }) {
 }
 function item5({ navigation }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <Image
       source={require('./assets/tuba.jpg')}
       style={styles.itemPicture} />
@@ -149,7 +155,7 @@ function item5({ navigation }) {
 
 
   //===========================================================//
-  // NAVIGATION SETTINGS
+  // NAVIGATION PAGES
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -171,15 +177,10 @@ function MyStack() {
   //===========================================================//
   // STYLE SHEET
 const styles = StyleSheet.create({
-  main: {
+  mainContainer: {
     flex: 1,
     backgroundColor: "#7B3AFF",
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#7B3AFF",
     alignItems: 'center',
   },
   title: {
@@ -205,9 +206,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 70,
   },
-  buttons: {
-    margin: 18,
-  },
   itemPicture: {
     resizeMode: 'contain',
     height: 200,
@@ -230,7 +228,7 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack />
+      <MyStack/>
     </NavigationContainer>
   );
 }
